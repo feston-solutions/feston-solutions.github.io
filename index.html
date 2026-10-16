@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="FES | Feston Energy Solutions. Ingeniería y soluciones energéticas.">
+    <meta name="theme-color" content="#0b1628">
+    <meta name="description"
+          content="FES | Feston Energy Solutions. Ingeniería, electricidad y soluciones energéticas.">
 
     <title>FES | Feston Energy Solutions</title>
 
@@ -35,10 +37,12 @@
             background: var(--white);
         }
 
+        /* CABECERA E IDENTIDAD CORPORATIVA */
+
         header {
             background: var(--navy);
             color: var(--white);
-            padding: 22px 7%;
+            padding: 18px 7%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -47,21 +51,36 @@
         }
 
         .brand {
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
 
-        .brand span {
-            color: var(--green);
-        }
-
-        .brand small {
+        .brand img {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
             display: block;
-            color: var(--gray);
-            font-size: 0.65rem;
-            font-weight: 400;
+        }
+
+        .brand-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            color: var(--white);
+            font-size: 1.05rem;
+            font-weight: 800;
             letter-spacing: 1.5px;
+            line-height: 1.4;
+        }
+
+        .brand-slogan {
+            color: var(--green);
+            font-size: 0.72rem;
+            letter-spacing: 0.5px;
+            margin-top: 3px;
         }
 
         nav {
@@ -74,11 +93,14 @@
             color: var(--white);
             text-decoration: none;
             font-size: 0.9rem;
+            transition: color 0.2s;
         }
 
         nav a:hover {
             color: var(--green);
         }
+
+        /* PANTALLA DE INICIO */
 
         .hero {
             background:
@@ -145,6 +167,8 @@
             transform: translateY(-3px);
         }
 
+        /* SECCIONES */
+
         section {
             padding: 75px 7%;
         }
@@ -163,6 +187,8 @@
         .section-heading p {
             color: #637083;
         }
+
+        /* SERVICIOS */
 
         .services {
             background: var(--background);
@@ -207,6 +233,8 @@
             font-size: 0.95rem;
         }
 
+        /* NOSOTROS */
+
         .about {
             background: var(--white);
         }
@@ -220,6 +248,8 @@
             margin-top: 16px;
         }
 
+        /* CONTACTO */
+
         .contact {
             background: var(--navy);
             color: var(--white);
@@ -232,6 +262,8 @@
             margin: 15px auto 28px;
         }
 
+        /* PIE DE PÁGINA */
+
         footer {
             background: #07101d;
             color: var(--gray);
@@ -240,13 +272,39 @@
             font-size: 0.85rem;
         }
 
-        @media (max-width: 600px) {
+        footer .footer-slogan {
+            color: var(--green);
+            margin-top: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        /* DISEÑO ADAPTABLE */
+
+        @media (max-width: 760px) {
             header {
-                padding: 20px 6%;
+                padding: 18px 6%;
+            }
+
+            .brand img {
+                width: 54px;
+                height: 54px;
+            }
+
+            .brand-name {
+                font-size: 0.88rem;
+                letter-spacing: 1px;
+            }
+
+            .brand-slogan {
+                font-size: 0.65rem;
             }
 
             nav {
                 gap: 14px;
+            }
+
+            nav a {
+                font-size: 0.85rem;
             }
 
             .hero {
@@ -258,29 +316,70 @@
                 padding: 60px 6%;
             }
         }
+
+        @media (max-width: 380px) {
+            .brand {
+                gap: 9px;
+            }
+
+            .brand img {
+                width: 46px;
+                height: 46px;
+            }
+
+            .brand-name {
+                font-size: 0.78rem;
+            }
+
+            .brand-slogan {
+                font-size: 0.59rem;
+            }
+        }
     </style>
 </head>
 
 <body>
 
     <header>
-        <div class="brand">
-            FES<span>.</span>
-            <small>FESTON ENERGY SOLUTIONS</small>
-        </div>
 
-        <nav>
+        <a href="#inicio"
+           class="brand"
+           aria-label="FES | Feston Energy Solutions - Inicio">
+
+            <img
+                src="Feston_Energy_Solutions_variante_1.png"
+                alt="Logotipo de FES"
+            >
+
+            <div class="brand-info">
+
+                <span class="brand-name">
+                    FESTON ENERGY SOLUTIONS
+                </span>
+
+                <span class="brand-slogan">
+                    Where Energy Meets Expertise
+                </span>
+
+            </div>
+
+        </a>
+
+        <nav aria-label="Navegación principal">
             <a href="#inicio">Inicio</a>
             <a href="#servicios">Servicios</a>
             <a href="#nosotros">Nosotros</a>
             <a href="#contacto">Contacto</a>
         </nav>
+
     </header>
 
     <main>
 
         <section class="hero" id="inicio">
+
             <div class="hero-content">
+
                 <div class="eyebrow">
                     Ingeniería · Tecnología · Energía
                 </div>
@@ -299,66 +398,90 @@
                 <a href="#servicios" class="button">
                     Descubre nuestros servicios
                 </a>
+
             </div>
+
         </section>
 
         <section class="services" id="servicios">
+
             <div class="section-heading">
+
                 <h2>Ingeniería que aporta soluciones</h2>
 
                 <p>
                     Un enfoque técnico y profesional para afrontar
                     los desafíos energéticos y eléctricos.
                 </p>
+
             </div>
 
             <div class="service-grid">
 
                 <article class="service-card">
+
                     <div class="service-number">01 / ENERGÍA</div>
+
                     <h3>Energía solar fotovoltaica</h3>
+
                     <p>
                         Diseño y dimensionamiento de sistemas
                         fotovoltaicos adaptados a las necesidades
                         de cada instalación.
                     </p>
+
                 </article>
 
                 <article class="service-card">
+
                     <div class="service-number">02 / ELECTRICIDAD</div>
+
                     <h3>Ingeniería eléctrica</h3>
+
                     <p>
                         Soluciones técnicas para instalaciones
                         eléctricas, evaluación y optimización
                         de sistemas.
                     </p>
+
                 </article>
 
                 <article class="service-card">
+
                     <div class="service-number">03 / CONSULTORÍA</div>
+
                     <h3>Consultoría técnica</h3>
+
                     <p>
                         Análisis de necesidades, evaluación de
                         alternativas y orientación para la toma
                         de decisiones técnicas.
                     </p>
+
                 </article>
 
                 <article class="service-card">
+
                     <div class="service-number">04 / ASESORÍA</div>
+
                     <h3>Asesoría energética</h3>
+
                     <p>
                         Orientación para identificar oportunidades
                         de mejora en el aprovechamiento de
                         la energía.
                     </p>
+
                 </article>
 
             </div>
+
         </section>
 
         <section class="about" id="nosotros">
+
             <div class="about-content">
+
                 <div class="eyebrow">Nuestra filosofía</div>
 
                 <h2>
@@ -377,10 +500,13 @@
                     atención a las necesidades del cliente y
                     búsqueda de soluciones eficientes y confiables.
                 </p>
+
             </div>
+
         </section>
 
         <section class="contact" id="contacto">
+
             <h2>¿Tienes un proyecto en mente?</h2>
 
             <p>
@@ -392,17 +518,29 @@
             <a href="#inicio" class="button">
                 Volver al inicio
             </a>
+
         </section>
 
     </main>
 
     <footer>
+
         <p>
-            &copy; 2026 FES | Feston Energy Solutions.
+            &copy; <span id="year"></span>
+            FES | Feston Energy Solutions.
             Todos los derechos reservados.
         </p>
-        <p>Ingeniería y soluciones energéticas.</p>
+
+        <p class="footer-slogan">
+            Where Energy Meets Expertise
+        </p>
+
     </footer>
+
+    <script>
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+    </script>
 
 </body>
 </html>
