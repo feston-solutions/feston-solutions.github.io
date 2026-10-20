@@ -356,6 +356,34 @@
 
 /* CARRITO */
 
+        /* CONTROLES DE CANTIDAD */
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-controls button {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #d6dee8;
+    border-radius: 5px;
+    background: var(--white);
+    color: var(--navy);
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.quantity-controls button:hover {
+    background: var(--background);
+}
+
+.quantity-controls span {
+    min-width: 20px;
+    text-align: center;
+}
+
 .cart-panel {
     margin-top: 30px;
     padding: 25px;
@@ -950,51 +978,110 @@ a tus objetivos y necesidades.
     }
 
     // Actualizar las cantidades y el contenido del carrito.
-    function renderCart() {
-        cartItems.innerHTML = "";
+    
+// Actualiza el carrito y sus controles de cantidad.
+function renderCart() {
 
-        let totalItems = 0;
+    // Limpiar el contenido anterior para reconstruir el carrito.
+    cartItems.innerHTML = "";
 
-        Object.entries(cart).forEach(([id, quantity]) => {
-            totalItems += quantity;
+    // Contar todas las unidades añadidas.
+    let totalItems = 0;
 
-            const product = products.find(item => item.id === Number(id));
+    // Recorrer los productos que contiene el carrito.
+    Object.entries(cart).forEach(([id, quantity]) => {
 
-            if (!product) return;
+        // Buscar los datos del producto correspondiente.
+        const product = products.find(
+            item => item.id === Number(id)
+        );
 
-            const row = document.createElement("div");
-            row.className = "cart-item";
+        // Ignorar productos que ya no existan en el catálogo.
+        if (!product) return;
 
-            const label = document.createElement("span");
-            label.textContent = `${product.name} × ${quantity}`;
+        // Sumar las unidades al contador general.
+        totalItems += quantity;
 
-            const removeButton = document.createElement("button");
-            removeButton.type = "button";
-            removeButton.textContent = "Quitar uno";
-            removeButton.setAttribute(
-                "aria-label",
-                `Quitar una unidad de ${product.name}`
-            );
+        // Crear la fila del producto.
+        const row = document.createElement("div");
+        row.className = "cart-item";
 
-            removeButton.addEventListener("click", () => {
-                cart[id]--;
+        // Mostrar el nombre y la cantidad.
+        const label = document.createElement("span");
+        label.textContent = `${product.name} × ${quantity}`;
 
-                if (cart[id] <= 0) {
-                    delete cart[id];
-                }
+        // Agrupar los controles de cantidad.
+        const controls = document.createElement("div");
+        controls.className = "quantity-controls";
 
-                renderCart();
-            });
+        // Botón para disminuir una unidad.
+        const decreaseButton = document.createElement("button");
+        decreaseButton.type = "button";
+        decreaseButton.textContent = "−";
+        decreaseButton.setAttribute(
+            "aria-label",
+            `Disminuir cantidad de ${product.name}`
+        );
 
-            row.append(label, removeButton);
-            cartItems.appendChild(row);
+        decreaseButton.addEventListener("click", () => {
+
+            // Restar una unidad.
+            cart[id]--;
+
+            // Eliminar el producto cuando llegue a cero.
+            if (cart[id] <= 0) {
+                delete cart[id];
+            }
+
+            // Actualizar el carrito.
+            renderCart();
         });
 
-        cartCount.textContent = totalItems;
-        cartEmpty.hidden = totalItems > 0;
-        sendOrder.disabled = totalItems === 0;
-    }
+        // Mostrar la cantidad actual.
+        const quantityLabel = document.createElement("span");
+        quantityLabel.textContent = quantity;
 
+        // Botón para aumentar una unidad.
+        const increaseButton = document.createElement("button");
+        increaseButton.type = "button";
+        increaseButton.textContent = "+";
+        increaseButton.setAttribute(
+            "aria-label",
+            `Aumentar cantidad de ${product.name}`
+        );
+
+        increaseButton.addEventListener("click", () => {
+
+            // Añadir una unidad más.
+            cart[id]++;
+
+            // Actualizar el carrito.
+            renderCart();
+        });
+
+        // Incorporar los controles a su grupo.
+        controls.append(
+            decreaseButton,
+            quantityLabel,
+            increaseButton
+        );
+
+        // Añadir la información y los controles a la fila.
+        row.append(label, controls);
+
+        // Incorporar la fila al carrito.
+        cartItems.appendChild(row);
+    });
+
+    // Actualizar el número total de unidades.
+    cartCount.textContent = totalItems;
+
+    // Mostrar el mensaje cuando el carrito esté vacío.
+    cartEmpty.hidden = totalItems > 0;
+
+    // Activar el envío únicamente si hay productos.
+    sendOrder.disabled = totalItems === 0;
+}
     // Abrir y cerrar el panel del carrito.
     document.getElementById("openCart").addEventListener("click", () => {
         cartPanel.hidden = false;
